@@ -3,21 +3,28 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\Diary as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class Diary extends Authenticatable
+class Diary extends Model 
 {
     use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * モデルと関連しているテーブル
+     *
+     * @var string
+     */
+    protected $table = 'diary';
+
+    /**
+     * 値の上書きをしないカラム 
      *
      * @var array
      */
-    protected $fillable = [
+    protected $guarded = [
+        'id',
         'user_id',
         'date',
-        'diary',
     ];
 }

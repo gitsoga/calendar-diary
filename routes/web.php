@@ -17,4 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('calendar/{month}', 'CalendarController@show');
+Route::get('calendar/{yearmonth}', 'CalendarController@show');
+Route::get('diary/new/{yearmonth}/{day}', 'DiaryController@new');
+
+Route::get('404', function () {
+    return view('notfound');
+});
