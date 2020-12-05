@@ -8,6 +8,21 @@ use App\Diary;
 class calendarController extends Controller
 {
     /**
+     * TOP表示
+     * 表示した年月に合わせたカレンダーを表示するURLへリダイレクト
+     *
+     * @param $yearmonth
+     * @return Route
+     */
+    public function top()
+    {
+        $date = new \Datetime();
+        $yearmonth = $date->format('Y-m');
+
+        return redirect()->action('CalendarController@show', ['yearmonth' => $yearmonth]);
+    }
+
+    /**
      * カレンダー表示
      *
      * @param $yearmonth

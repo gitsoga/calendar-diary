@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'CalendarController@top');
 Route::get('calendar/{yearmonth}', 'CalendarController@show');
 Route::get('diary/new/{yearmonth}/{day}', 'DiaryController@new');
 
