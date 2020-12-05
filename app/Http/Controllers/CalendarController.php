@@ -22,10 +22,7 @@ class calendarController extends Controller
         }
 
         // 指定された年月の日記を取得
-        $diaries = Diary::where('user_id','=', '1')
-            ->where('date','like',$yearmonth.'%')
-            ->orderBy('date')
-            ->get();
+        $diaries = Diary::getUserDiaryForMonth(1, $yearmonth);
 
         // 指定された年月の最終日を取得
         $lastDay = $date->format('t');
@@ -43,11 +40,11 @@ class calendarController extends Controller
     {
         // 1ヶ月分の配列を作成
         $calendars = [];
-        for($i=1; $i <= $lastDay; $i++) { 
+        for($i=1; $i <= $lastDay; $i++) {
             $calendars[$i] = [];
         }
 
-        foreach($diaries as $diary) 
+        foreach($diaries as $diary)
         {
             $day = (int) substr($diary->date, -2);
             $calendars[$day] = $diary;

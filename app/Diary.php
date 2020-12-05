@@ -27,4 +27,19 @@ class Diary extends Model
         'user_id',
         'date',
     ];
+
+    /**
+     * 指定された年月の日記を取得
+     *
+     * @param $userId
+     * @param $yearmonth
+     * @return object
+     */
+    public static function getUserDiaryForMonth($userId, $yearmonth)
+    {
+        return self::where('user_id','=', $userId)
+            ->where('date','like',$yearmonth.'%')
+            ->orderBy('date')
+            ->get();
+    }
 }
