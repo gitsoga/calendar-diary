@@ -13,7 +13,7 @@
 @isset ($calendar->diary)
            <div>済</div>
            @else
-               <div><a href="{{ action('DiaryController@new', [$yearmonth, $day]) }}">日記を書く</a></div>
+               <div><a href="{{ action('DiaryController@new', ['yearmonthday' => $yearmonth.'-'.$day]) }}">日記を書く</a></div>
            @endisset
        </div>
 @endforeach

@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'CalendarController@top');
 Route::get('calendar/{yearmonth}', 'CalendarController@show');
-Route::get('diary/new/{yearmonth}/{day}', 'DiaryController@new');
+Route::get('new/{yearmonthday}', 'DiaryController@new');
+Route::post('post', 'DiaryController@store');
 
 Route::get('404', function () {
     return view('notfound');
