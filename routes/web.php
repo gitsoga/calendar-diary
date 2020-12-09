@@ -21,3 +21,7 @@ Route::post('post', 'DiaryController@store');
 Route::get('404', function () {
     return view('notfound');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
