@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreDiaryPost;
+<<<<<<< HEAD
 use App\Diary;
+=======
+use Illuminate\Http\Request;
+>>>>>>> 087ef6deaa7f0ec16c747c937710facffa411b29
 
 class DiaryController extends Controller
 {
     /**
-     * 日記の新規作成
+     * 日記の新規作成.
      *
      * @param $yearMonthDay
      * @return View
@@ -17,16 +20,16 @@ class DiaryController extends Controller
     public function new($yearMonthDay)
     {
         // 形式チェック
-        if(0){
-        
+        if (0) {
         }
 
         $date = new \Datetime($yearMonthDay);
+
         return view('new', ['date' => $date->format('Y-m-d')]);
     }
 
     /**
-     * 新しいブログポストの保存
+     * 新しいブログポストの保存.
      *
      * @param  StoreDiaryPost  $request
      * @return Response
