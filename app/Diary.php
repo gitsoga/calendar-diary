@@ -3,22 +3,22 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
-class Diary extends Model 
+class Diary extends Model
 {
     use Notifiable;
 
     /**
-     * モデルと関連しているテーブル
+     * モデルと関連しているテーブル.
      *
      * @var string
      */
     protected $table = 'diary';
 
     /**
-     * 値の上書きをしないカラム 
+     * 値の上書きをしないカラム.
      *
      * @var array
      */
@@ -29,7 +29,7 @@ class Diary extends Model
     ];
 
     /**
-     * 指定された年月の日記を取得
+     * 指定された年月の日記を取得.
      *
      * @param $userId
      * @param $yearmonth
@@ -37,8 +37,8 @@ class Diary extends Model
      */
     public static function getUserDiaryForMonth($userId, $yearmonth)
     {
-        return self::where('user_id','=', $userId)
-            ->where('date','like',$yearmonth.'%')
+        return self::where('user_id', '=', $userId)
+            ->where('date', 'like', $yearmonth.'%')
             ->orderBy('date')
             ->get();
     }

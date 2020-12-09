@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Diary;
+use Illuminate\Http\Request;
 
 class calendarController extends Controller
 {
     /**
      * TOP表示
-     * 表示した年月に合わせたカレンダーを表示するURLへリダイレクト
+     * 表示した年月に合わせたカレンダーを表示するURLへリダイレクト.
      *
      * @param $yearmonth
      * @return Route
@@ -23,7 +23,7 @@ class calendarController extends Controller
     }
 
     /**
-     * カレンダー表示
+     * カレンダー表示.
      *
      * @param $yearmonth
      * @return View
@@ -32,8 +32,7 @@ class calendarController extends Controller
     {
         // 年-月の形でなければエラーとする
         $date = new \Datetime($yearmonth);
-        if(0)
-        {
+        if (0) {
         }
 
         // 指定された年月の日記を取得
@@ -55,12 +54,11 @@ class calendarController extends Controller
     {
         // 1ヶ月分の配列を作成
         $calendars = [];
-        for($i=1; $i <= $lastDay; $i++) {
+        for ($i = 1; $i <= $lastDay; $i++) {
             $calendars[$i] = [];
         }
 
-        foreach($diaries as $diary)
-        {
+        foreach ($diaries as $diary) {
             $day = (int) substr($diary->date, -2);
             $calendars[$day] = $diary;
         }
