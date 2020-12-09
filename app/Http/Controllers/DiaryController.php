@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDiaryPost;
+use App\Diary;
 
 class DiaryController extends Controller
 {
@@ -34,5 +35,15 @@ class DiaryController extends Controller
     {
         // バリデーション済みデータの取得
         $validated = $request->validated();
+
+        $diary = new Diary();
+
+        $diary->user_id = 1;
+        $diary->date = $validated['date'];
+        $diary->diary = $validated['diary'];
+
+        $diary->save();
+        
+        return view('complete');
     }
 }

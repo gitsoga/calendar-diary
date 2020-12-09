@@ -26,7 +26,7 @@ class StoreDiaryPost extends FormRequest
     {
         return [
             'date' => 'required|date',
-            'diary' => 'required|size:1000',
+            'diary' => 'required|max:1000',
         ];
     }
 }
