@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDiaryPost;
-<<<<<<< HEAD
 use App\Diary;
-=======
 use Illuminate\Http\Request;
->>>>>>> 087ef6deaa7f0ec16c747c937710facffa411b29
 
 class DiaryController extends Controller
 {
