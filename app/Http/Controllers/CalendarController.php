@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Diary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class calendarController extends Controller
 {
@@ -35,8 +36,11 @@ class calendarController extends Controller
         if (0) {
         }
 
+        // 認証しているユーザーのID取得
+        $user_id = Auth::id();
+
         // 指定された年月の日記を取得
-        $diaries = Diary::getUserDiaryForMonth(1, $yearmonth);
+        $diaries = Diary::getUserDiaryForMonth($user_id, $yearmonth);
 
         // 指定された年月の最終日を取得
         $lastDay = $date->format('t');

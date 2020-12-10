@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDiaryPost;
 use App\Diary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DiaryController extends Controller
 {
@@ -36,14 +37,17 @@ class DiaryController extends Controller
         // バリデーション済みデータの取得
         $validated = $request->validated();
 
+        // 現在認証されているユーザーのID取得
+        $user_id = Auth::id();
+
         $diary = new Diary();
 
-        $diary->user_id = 1;
+        $diary->user_id = $user_id;
         $diary->date = $validated['date'];
         $diary->diary = $validated['diary'];
 
         $diary->save();
-        
+
         return view('complete');
     }
 }
