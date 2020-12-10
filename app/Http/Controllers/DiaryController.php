@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDiaryPost;
 use App\Diary;
+use App\Http\Requests\StoreDiaryPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
