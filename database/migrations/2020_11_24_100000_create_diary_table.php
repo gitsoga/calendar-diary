@@ -19,6 +19,7 @@ class CreateDiaryTable extends Migration
             $table->date('date');
             $table->text('diary');
             $table->timestamps();
+            $table->unique(['user_id', 'date']);
         });
     }
 
