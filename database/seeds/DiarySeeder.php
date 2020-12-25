@@ -11,8 +11,14 @@ class DiarySeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Diary::class, 50)->create()->each(function ($diary) {
-            $diary->posts()->save(factory(App\Post::class)->make());
-        });
+        // User5件作成する
+        // その際にUser1件に対応するDiaryを10件作る
+        factory(App\User::class, 5)
+            ->create()
+            ->each(
+                function ($user) {
+                    factory(App\Diary::class, 10)
+                        ->create(['user_id' => $user->id]);
+            });
     }
 }

@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Diary::class, function (Faker $faker) {
     return [
-        'user_id' => 1,
+        'user_id' => $faker->randomDigitNotNull(),
         'date' => $faker->date(),
         'diary' => $faker->realText(),
     ];

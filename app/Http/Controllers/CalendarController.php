@@ -6,7 +6,7 @@ use App\Diary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class calendarController extends Controller
+class CalendarController extends Controller
 {
     /**
      * TOP表示
