@@ -42,6 +42,9 @@ class CalendarController extends Controller
         // 指定された年月の日記を取得
         $diaries = Diary::getUserDiaryForMonth($user_id, $yearmonth);
 
+        // 指定された年月の１日の曜日を取得
+        $space_num = $date->format('w');
+
         // 指定された年月の最終日を取得
         $lastDay = $date->format('t');
 
@@ -51,6 +54,7 @@ class CalendarController extends Controller
         return view('calendar', [
             'yearmonth' => $yearmonth,
             'calendars' => $calendars,
+            'space_num' => $space_num,
         ]);
     }
 
