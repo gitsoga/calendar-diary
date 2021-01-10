@@ -17,6 +17,8 @@ Route::get('/', 'CalendarController@top');
 Route::get('calendar/{yearmonth}', 'CalendarController@show')->middleware('auth');
 Route::get('new/{yearmonthday}', 'DiaryController@new')->middleware('auth');
 Route::post('post', 'DiaryController@store')->middleware('auth');
+Route::get('edit/{yearmonthday}', 'DiaryController@edit')->middleware('auth');
+Route::post('editPost', 'DiaryController@editStore')->middleware('auth');
 
 Route::get('404', function () {
     return view('notfound');

@@ -19,7 +19,8 @@
         <div class="col-md-1 border">
             <div>{{ $day }}</div>
             @isset ($calendar->diary)
-            <div>済</div>
+            <div>{{ Str::limit($calendar->diary, 20) }}</div>
+            <div><a href="{{ action('DiaryController@edit', ['yearmonthday' => $yearmonth.'-'.$day]) }}">日記を編集する</a></div>
             @else
             <div><a href="{{ action('DiaryController@new', ['yearmonthday' => $yearmonth.'-'.$day]) }}">日記を書く</a></div>
             @endisset
