@@ -49,7 +49,7 @@ class DiaryController extends Controller
 
         return view('edit', [
             'date' => $date->format('Y-m-d'),
-            'diary' => $diary['diary']
+            'diary' => $diary['diary'],
         ]);
     }
 
