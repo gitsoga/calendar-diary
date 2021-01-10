@@ -19,6 +19,6 @@ class DiarySeeder extends Seeder
                 function ($user) {
                     factory(App\Diary::class, 10)
                         ->create(['user_id' => $user->id]);
-            });
+                });
     }
 }
