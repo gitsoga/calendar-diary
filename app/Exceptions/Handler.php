@@ -50,6 +50,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        // データ不正
+        if($exception instanceof DataFormatException) {
+            $data["errorMsg"] = $exception->getMessage();
+            return response()->view("errors.data", $data);
+        }
         return parent::render($request, $exception);
     }
 }

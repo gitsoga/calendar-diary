@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Diary;
+use App\Http\Middleware\CheckDateFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,10 +32,10 @@ class CalendarController extends Controller
      */
     public function show($yearmonth)
     {
-        // 年-月の形でなければエラーとする
+        // 日付の書式・存在をチェック
+        CheckDateFormat::checkYearMonth($yearmonth);
+
         $date = new \Datetime($yearmonth);
-        if (0) {
-        }
 
         // 認証しているユーザーのID取得
         $user_id = Auth::id();

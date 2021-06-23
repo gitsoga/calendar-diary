@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Diary;
 use App\Http\Requests\StoreDiaryPost;
+use App\Http\Middleware\CheckDateFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +18,8 @@ class DiaryController extends Controller
      */
     public function new($yearMonthDay)
     {
-        // 形式チェック
-        if (0) {
-        }
+        // 日付の書式・存在をチェック
+        CheckDateFormat::checkYearMonthDay($yearMonthDay);
 
         $date = new \Datetime($yearMonthDay);
 
@@ -34,9 +34,8 @@ class DiaryController extends Controller
      */
     public function edit($yearMonthDay)
     {
-        // 形式チェック
-        if (0) {
-        }
+        // 日付の書式・存在をチェック
+        CheckDateFormat::checkYearMonthDay($yearMonthDay);
 
         $date = new \Datetime($yearMonthDay);
 
