@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 /**
- * 要求された年月の日記データを返す
+ * 要求された年月の日記データを返す.
  */
 class ShowCalendars extends Controller
 {
@@ -48,11 +48,11 @@ class ShowCalendars extends Controller
     }
 
     /**
-     * 日記データを整形する
+     * 日記データを整形する.
      *
      * @param Diary $diaries 日記データ
-     * @param Int $last_day 日記の最終日
-     * @return Array
+     * @param int $last_day 日記の最終日
+     * @return array
      */
     private static function formatCalendar($diaries, $last_day)
     {
