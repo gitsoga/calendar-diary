@@ -8,19 +8,19 @@
         <div>{{ index }}</div>
         <div v-if="item.length !== 0">
           <div>{{ item.diary }}</div>
-          <div><a href="">日記を編集する</a></div>
+          <div><router-link to="/edit">日記を編集する</router-link></div>
         </div>
         <div v-else>
           <div><a href="">日記を書く</a></div>
         </div>
       </div>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: "vue_diary",
   data () {
     return {
       yearMonth: null,

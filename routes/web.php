@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
 Route::get('/', 'CalendarController@top');
 Route::get('new/{yearmonthday}', 'DiaryController@new')->middleware('auth');
 Route::post('post', 'DiaryController@store')->middleware('auth');
@@ -26,3 +27,7 @@ Route::get('404', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+ */
+Route::get('/{any}', function() {
+    return view('app');
+})->where('any', '.*');
