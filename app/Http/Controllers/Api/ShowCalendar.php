@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 /**
  * 要求された年月の日記データを返す.
  */
-class ShowCalendars extends Controller
+class ShowCalendar extends Controller
 {
     /**
      * Handle the incoming request.

@@ -30,7 +30,7 @@ export default {
   },
   mounted () {
     axios
-      .get('/api/showCalendars')
+      .get('/api/showCalendar')
       .then(response => {
         this.yearMonth = response.data.yearMonth;
         this.calendars = response.data.calendars;
