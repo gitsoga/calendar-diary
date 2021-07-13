@@ -19,7 +19,7 @@ class DiaryTest extends TestCase
     {
         factory(Diary::class)->create([
             'user_id' => 1,
-            'date' => '2021-07-01',
+            'date' => '2021-07-20',
         ]);
         factory(Diary::class)->create([
             'user_id' => 1,
@@ -27,7 +27,7 @@ class DiaryTest extends TestCase
         ]);
         factory(Diary::class)->create([
             'user_id' => 1,
-            'date' => '2021-07-20',
+            'date' => '2021-07-01',
         ]);
         factory(Diary::class)->create([
             'user_id' => 1,
@@ -41,5 +41,6 @@ class DiaryTest extends TestCase
         $response = Diary::getUserDiaryForMonth(1,'2021-07');
 
         $this->assertCount(3, $response);
+        $this->assertEquals($response[0]->date, '2021-07-01');
     }
 }
