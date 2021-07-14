@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Diary;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\CheckDateFormat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
 
 /**
  * 要求された年月の日記データを返す.
@@ -23,10 +23,10 @@ class ShowCalendar extends Controller
     public function __invoke($year_month = null)
     {
         // 指定がない場合、今日の年-月を取得
-        if(isset($year_month)) {
+        if (isset($year_month)) {
             CheckDateFormat::checkYearMonth($year_month);
             $date = new Carbon($year_month);
-        }else{
+        } else {
             $now = Carbon::now();
             $year_month = $now->format('Y-m');
             $date = new Carbon($year_month);
