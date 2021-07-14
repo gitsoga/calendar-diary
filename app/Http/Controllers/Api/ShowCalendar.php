@@ -8,6 +8,7 @@ use App\Http\Middleware\CheckDateFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 /**
  * 要求された年月の日記データを返す.
@@ -19,10 +20,17 @@ class ShowCalendar extends Controller
      *
      * @return
      */
-    public function __invoke()
+    public function __invoke($year_month = null)
     {
-        $date = new \Datetime();
-        $year_month = $date->format('Y-m');
+        // 指定がない場合、今日の年-月を取得
+        if(isset($year_month)) {
+            CheckDateFormat::checkYearMonth($year_month);
+            $date = new Carbon($year_month);
+        }else{
+            $now = Carbon::now();
+            $year_month = $now->format('Y-m');
+            $date = new Carbon($year_month);
+        }
 
         // 認証しているユーザーのID取得
         //$user_id = Auth::id();
