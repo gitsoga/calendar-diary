@@ -11,7 +11,7 @@ class DiaryTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * getUserDiaryForMonth()のテスト
+     * getUserDiaryForMonth()のテスト.
      *
      * @return void
      */
@@ -38,7 +38,7 @@ class DiaryTest extends TestCase
             'date' => '2021-07-01',
         ]);
 
-        $response = Diary::getUserDiaryForMonth(1,'2021-07');
+        $response = Diary::getUserDiaryForMonth(1, '2021-07');
 
         $this->assertCount(3, $response);
         $this->assertEquals($response[0]->date, '2021-07-01');
