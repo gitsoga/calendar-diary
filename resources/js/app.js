@@ -3,37 +3,88 @@ require('./bootstrap');
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HeaderComponent from "./components/HeaderComponent";
+import HeaderNotLoginComponent from "./components/HeaderNotLoginComponent";
 import DiaryListComponent from "./components/DiaryListComponent";
 import DiaryCreateComponent from "./components/DiaryCreateComponent";
 import DiaryShowComponent from "./components/DiaryShowComponent";
 import DiaryEditComponent from "./components/DiaryEditComponent";
+import cognito from './cognito'
+import Login from './components/Login'
+import Signup from './components/Signup'
+import Confirm from './components/Confirm'
 
 Vue.use(VueRouter);
+
+const requireAuth = (to, from, next) => {
+  cognito.isAuthenticated()
+    .then(session => {
+      next()
+    })
+    .catch(session => {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    })
+}
+
+const logout = (to, from, next) => {
+  cognito.logout()
+  next('/login')
+}
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         {
+            path: '/',
+            redirect: '/diary/list'
+        },
+        {
             path: '/diary/list',
             name: 'diary.list',
-            component: DiaryListComponent
+            component: DiaryListComponent,
+            beforeEnter: requireAuth
         },
         {
             path: '/diary/create',
             name: 'diary.create',
-            component: DiaryCreateComponent
+            component: DiaryCreateComponent,
+            beforeEnter: requireAuth
         },
         {
             path: '/diary/:diaryId',
             name: 'diary.show',
             component: DiaryShowComponent,
-            props: true
+            props: true,
+            beforeEnter: requireAuth
         },
         {
             path: '/diary/:diaryId/edit',
             name: 'diary.edit',
             component: DiaryEditComponent,
-            props: true
+            props: true,
+            beforeEnter: requireAuth
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: Login
+        },
+        {
+            path: '/singup',
+            name: 'Signup',
+            component: Signup
+        },
+        {
+            path: '/confirm',
+            name: 'Confirm',
+            component: Confirm
+        },
+        {
+            path: '/logout',
+            name: 'logout',
+            beforeEnter: logout
         },
     ]
 });
@@ -46,10 +97,25 @@ const router = new VueRouter({
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('header-component', HeaderComponent);
 
+Vue.config.productionTip = false
 
 new Vue({
   el: '#app',
-  router
+  router,
+  cognito,
+  components: { HeaderComponent, HeaderNotLoginComponent },
+  computed: {
+    headerComponent() {
+      switch(this.$route.path) {
+        case '/login':
+        case '/singup':
+        case '/confirm':
+        case '/logout':
+          return 'HeaderNotLoginComponent';
+        default:
+          return 'HeaderComponent';
+      }
+    }
+  }
 });

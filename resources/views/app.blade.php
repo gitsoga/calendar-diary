@@ -14,7 +14,7 @@
 </head>
 <body>
 <div id="app">
-    <header-component></header-component>
+    <component :is="headerComponent"></component>
 
     <router-view></router-view>
 </div>

@@ -25,6 +25,8 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
+        "amazon-cognito-identity-js": "^5.0.5",
+        "aws-sdk": "^2.951.0",
         "vue-router": "^3.5.2"
     }
 }
