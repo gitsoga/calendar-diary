@@ -13,21 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*
-Route::get('/', 'CalendarController@top');
-Route::get('new/{yearmonthday}', 'DiaryController@new')->middleware('auth');
-Route::post('post', 'DiaryController@store')->middleware('auth');
-Route::get('edit/{yearmonthday}', 'DiaryController@edit')->middleware('auth');
-Route::post('editPost', 'DiaryController@editStore')->middleware('auth');
-
-Route::get('404', function () {
-    return view('notfound');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
- */
 Route::get('/{any}', function () {
     return view('app');
 })->where('any', '.*');
