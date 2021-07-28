@@ -229,4 +229,5 @@ return [
 
     ],
 
+    'cognito_publickey' => env('COGNITO_PUBLICKEY', ''),
 ];

@@ -67,19 +67,19 @@ class ShowCalendarTest extends TestCase
     private function insertTestData()
     {
         factory(Diary::class)->create([
-            'user_id' => 1,
+            'aws_username' => '111111111111111111111111111111111111',
             'date' => '2021-01-11',
         ]);
         factory(Diary::class)->create([
-            'user_id' => 1,
+            'aws_username' => '111111111111111111111111111111111111',
             'date' => '2021-02-28',
         ]);
         factory(Diary::class)->create([
-            'user_id' => 1,
+            'aws_username' => '111111111111111111111111111111111111',
             'date' => '2021-07-22',
         ]);
         factory(Diary::class)->create([
-            'user_id' => 1,
+            'aws_username' => '111111111111111111111111111111111111',
             'date' => '2021-08-13',
         ]);
     }

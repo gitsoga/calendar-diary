@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Diary;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\CheckDateFormat;
+use App\Http\Middleware\AccessCognito;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ class ShowCalendar extends Controller
      *
      * @return
      */
-    public function __invoke($year_month = null)
+    public function __invoke(Request $request, $year_month = null)
     {
         // 指定がない場合、今日の年-月を取得
         if (isset($year_month)) {
@@ -32,12 +33,13 @@ class ShowCalendar extends Controller
             $date = new Carbon($year_month);
         }
 
-        // 認証しているユーザーのID取得
-        //$user_id = Auth::id();
-        $user_id = 1; // 暫定
+        // AWS Cognitoで認証しているユーザーのusername取得
+        if(!($username = AccessCognito::getUsername($request->header('X-Authorization')))){
+            return response()->json([], 403);
+        }
 
         // 指定された年月の日記を取得
-        $diaries = Diary::getUserDiaryForMonth($user_id, $year_month);
+        $diaries = Diary::getUserDiaryForMonth($username, $year_month);
 
         // 指定された年月の１日の曜日を取得
         $space_num = $date->format('w');

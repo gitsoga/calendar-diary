@@ -29,13 +29,24 @@ export default {
     }
   },
   mounted () {
-    axios
-      .get('/api/showCalendar')
-      .then(response => {
-        this.yearMonth = response.data.yearMonth;
-        this.calendars = response.data.calendars;
-        this.spaceNum = response.data.spaceNum;
-      })
+    let self = this
+    const cognitoUser = this.$cognito.userPool.getCurrentUser();
+    cognitoUser.getSession(function (err, session) {
+      window.session = session;
+      if (err) {
+        alert(err);
+        return;
+      }
+      axios
+        .get('/api/showCalendar', {
+          headers: { "X-Authorization": session.getAccessToken().getJwtToken() }
+        })
+        .then(response => {
+          self.yearMonth = response.data.yearMonth;
+          self.calendars = response.data.calendars;
+          self.spaceNum = response.data.spaceNum;
+        })
+    })
   }
 };
 </script>
