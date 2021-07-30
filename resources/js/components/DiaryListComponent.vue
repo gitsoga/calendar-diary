@@ -28,25 +28,30 @@ export default {
       spaceNum: null,
     }
   },
+  methods: {
+    getToken: function () {
+      const cognitoUser = this.$cognito.userPool.getCurrentUser();
+      cognitoUser.getSession(function (err, session) {
+        window.session = session;
+        if (err) {
+          alert(err);
+          return;
+        }
+      });
+      return session.getAccessToken().getJwtToken();
+    }
+  },
   mounted () {
-    let self = this
-    const cognitoUser = this.$cognito.userPool.getCurrentUser();
-    cognitoUser.getSession(function (err, session) {
-      window.session = session;
-      if (err) {
-        alert(err);
-        return;
-      }
-      axios
-        .get('/api/showCalendar', {
-          headers: { "X-Authorization": session.getAccessToken().getJwtToken() }
-        })
-        .then(response => {
-          self.yearMonth = response.data.yearMonth;
-          self.calendars = response.data.calendars;
-          self.spaceNum = response.data.spaceNum;
-        })
-    })
+    axios
+      .get('/api/showCalendar', {
+        headers: { "X-Authorization": this.getToken() }
+      })
+      .then(response => {
+        let self = this
+        self.yearMonth = response.data.yearMonth;
+        self.calendars = response.data.calendars;
+        self.spaceNum = response.data.spaceNum;
+      })
   }
 };
 </script>
