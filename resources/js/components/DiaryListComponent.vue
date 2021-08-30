@@ -1,6 +1,18 @@
 <template>
   <div class="container-fluid">
-    <h1>{{ yearMonth }}</h1>
+    <div class="row">
+      <div class="col">
+        <router-link v-bind:to="{name: 'diary.list'}">
+          <button type="button" class="btn btn-primary">前月</button>
+        </router-link>
+      </div>
+      <div class="col">
+        <h1>{{ yearMonth }}</h1>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-primary">次月</button>
+      </div>
+    </div>
     <div class="row seven-cols">
       <div v-for="n in spaceNum" class="col-md-1 border">
       </div>
@@ -8,10 +20,10 @@
         <div>{{ index }}</div>
         <div v-if="item.length !== 0">
           <div>{{ item.diary }}</div>
-          <div><router-link to="/edit">日記を編集する</router-link></div>
+          <div><router-link v-bind:to="{name:'diary.edit', params: { diaryId: item.id, date:item.date }}">日記を編集する</router-link></div>
         </div>
         <div v-else>
-          <div><a href="">日記を書く</a></div>
+          <div><router-link v-bind:to="{name:'diary.create', params: { date: yearMonth +'-'+ ('00' + index ).slice( -2 ) }}">日記を書く</router-link></div>
         </div>
       </div>
     </div>
@@ -26,19 +38,8 @@ export default {
       yearMonth: null,
       calendars: [],
       spaceNum: null,
-    }
-  },
-  methods: {
-    getToken: function () {
-      const cognitoUser = this.$cognito.userPool.getCurrentUser();
-      cognitoUser.getSession(function (err, session) {
-        window.session = session;
-        if (err) {
-          alert(err);
-          return;
-        }
-      });
-      return session.getAccessToken().getJwtToken();
+      yearMonthLast: null,
+      yearMonthNext: null,
     }
   },
   mounted () {
@@ -51,6 +52,10 @@ export default {
         self.yearMonth = response.data.yearMonth;
         self.calendars = response.data.calendars;
         self.spaceNum = response.data.spaceNum;
+          //let date = new Date(self.yearMonth);
+          //date.setMonth(1);
+          //self.yearMonthLast = date.getDate();
+          //console.log(self.yearMonthLast);
       })
   }
 };

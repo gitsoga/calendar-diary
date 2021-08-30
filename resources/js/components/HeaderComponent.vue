@@ -7,9 +7,6 @@
                     <router-link v-bind:to="{name: 'diary.list'}">
                         <button class="btn btn-success">List</button>
                     </router-link>
-                    <router-link v-bind:to="{name: 'diary.create'}">
-                        <button class="btn btn-success">ADD</button>
-                    </router-link>
                     <router-link v-bind:to="{name: 'logout'}">
                         <button class="btn btn-success">LOGOUT</button>
                     </router-link>

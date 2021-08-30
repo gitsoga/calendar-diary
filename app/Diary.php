@@ -37,7 +37,7 @@ class Diary extends Model
      */
     public static function getUserDiaryForMonth($username, $yearmonth)
     {
-        return self::select('date', 'diary')
+        return self::select('id', 'date', 'diary')
             ->where('aws_username', '=', $username)
             ->where('date', 'like', $yearmonth.'%')
             ->orderBy('date')

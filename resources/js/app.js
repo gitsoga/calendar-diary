@@ -2,6 +2,7 @@ require('./bootstrap');
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import gv from './mixins/globalValiables'
 import HeaderComponent from "./components/HeaderComponent";
 import HeaderNotLoginComponent from "./components/HeaderNotLoginComponent";
 import DiaryListComponent from "./components/DiaryListComponent";
@@ -14,6 +15,7 @@ import Signup from './components/Signup'
 import Confirm from './components/Confirm'
 
 Vue.use(VueRouter);
+Vue.mixin(gv);
 
 const requireAuth = (to, from, next) => {
   cognito.isAuthenticated()
@@ -47,9 +49,10 @@ const router = new VueRouter({
             beforeEnter: requireAuth
         },
         {
-            path: '/diary/create',
+            path: '/diary/create/:date',
             name: 'diary.create',
             component: DiaryCreateComponent,
+            props: true,
             beforeEnter: requireAuth
         },
         {
@@ -60,7 +63,7 @@ const router = new VueRouter({
             beforeEnter: requireAuth
         },
         {
-            path: '/diary/:diaryId/edit',
+            path: '/diary/:diaryId/:date/edit',
             name: 'diary.edit',
             component: DiaryEditComponent,
             props: true,
