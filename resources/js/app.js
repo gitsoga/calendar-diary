@@ -63,7 +63,7 @@ const router = new VueRouter({
             beforeEnter: requireAuth
         },
         {
-            path: '/diary/:diaryId/:date/edit',
+            path: '/diary/:diaryId/edit',
             name: 'diary.edit',
             component: DiaryEditComponent,
             props: true,

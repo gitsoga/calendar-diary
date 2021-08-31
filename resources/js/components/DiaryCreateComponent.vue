@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-sm-6">
+        <h2>{{ date }}</h2>
         <form v-on:submit.prevent="submit">
           <div class="form-group row">
             <label for="diary" class="col-sm-3 col-form-label">日記</label>

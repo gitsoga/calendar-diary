@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/showCalendar/{year_month?}', Api\ShowCalendar::class);
-Route::get('/edit/{date}', Api\EditDiary::class);
+Route::get('/edit/{id}', Api\EditDiary::class);
 Route::post('/create', Api\CreatePostDiary::class);
-Route::post('/edit', Api\EditPostDiary::class);
+Route::post('/edit/{id}', Api\EditPostDiary::class);

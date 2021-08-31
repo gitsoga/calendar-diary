@@ -1,2 +1,57 @@
 <template>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-6">
+        <h2>{{ date }}</h2>
+        <form v-on:submit.prevent="submit">
+          <div class="form-group row">
+            <label for="diary" class="col-sm-3 col-form-label">日記</label>
+            <textarea id="diary" class="col-sm-9 form-control" v-model="diary"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">投稿</button>
+          </form>
+      </div>
+    </div>
+  </div>
 </template>
+
+<script>
+  export default {
+    props: {
+      diaryId: Number,
+    },
+    data: function () {
+      return {
+        date: null,
+        diary: ''
+      }
+    },
+    methods: {
+      getTask() {
+        axios.get('/api/edit/' + this.diaryId, {
+          headers: { "X-Authorization": this.getToken() }
+        })
+        .then((res) => {
+          this.date = res.data.date;
+          this.diary = res.data.diary;
+        });
+      },
+      submit() {
+        const form = new FormData();
+        form.append('id', this.diaryId);
+        form.append('date', this.date);
+        form.append('diary', this.diary);
+
+        axios.post('/api/edit/' + this.diaryId, form, {
+          headers: { "X-Authorization": this.getToken() }
+        })
+        .then((res) => {
+          this.$router.push({name: 'diary.list'});
+        });
+      }
+    },
+    mounted() {
+        this.getTask();
+    }
+  }
+</script>

@@ -20,7 +20,7 @@
         <div>{{ index }}</div>
         <div v-if="item.length !== 0">
           <div>{{ item.diary }}</div>
-          <div><router-link v-bind:to="{name:'diary.edit', params: { diaryId: item.id, date:item.date }}">日記を編集する</router-link></div>
+          <div><router-link v-bind:to="{name:'diary.edit', params: { diaryId: item.id }}">日記を編集する</router-link></div>
         </div>
         <div v-else>
           <div><router-link v-bind:to="{name:'diary.create', params: { date: yearMonth +'-'+ ('00' + index ).slice( -2 ) }}">日記を書く</router-link></div>
