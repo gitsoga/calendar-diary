@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 /**
- * .
+ * 日記の編集データ取得.
  */
 class EditDiary extends Controller
 {
@@ -20,6 +20,9 @@ class EditDiary extends Controller
      * Handle the incoming request.
      *
      * @return
+     * @param  Request  $request
+     * @param Integer $id 日記ID
+     * @return Response
      */
     public function __invoke(Request $request, $id)
     {
@@ -36,6 +39,7 @@ class EditDiary extends Controller
             'id' => $id,
             'date' => $diary['date'],
             'diary' => $diary['diary'],
+            'image_path' => $diary['image_path'],
         ], 200);
     }
 }

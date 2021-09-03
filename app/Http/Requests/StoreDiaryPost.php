@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class StoreDiaryPost extends FormRequest
 {
@@ -13,7 +14,6 @@ class StoreDiaryPost extends FormRequest
      */
     public function authorize()
     {
-        //return false;
         return true;
     }
 
@@ -27,6 +27,8 @@ class StoreDiaryPost extends FormRequest
         return [
             'date' => 'required|date',
             'diary' => 'required|max:1000',
+            'image' => 'nullable|file|image|max:2048',
+            'image_del_flg' => 'required|boolean',
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreDiaryPost;
 use App\Http\Middleware\CheckDateFormat;
 use App\Http\Middleware\AccessCognito;
 use Carbon\Carbon;
+use Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -25,19 +26,25 @@ class CreatePostDiary extends Controller
      */
     public function __invoke(StoreDiaryPost $request)
     {
-      Log::info('api top');
-
-      $validated = $request->validated();
+        $validated = $request->validated();
 
         // AWS Cognitoで認証しているユーザーのusername取得
         if(!($username = AccessCognito::getUsername($request->header('X-Authorization')))){
             return response()->json([], 403);
         }
 
+        $image = $validated['image'];
+        $image_path = null;
+        if($image) {
+            $path = Storage::disk('s3')->putFile('diary_image', $image, 'public');
+            $image_path = Storage::disk('s3')->url($path);
+        }
+
         $diary = new Diary();
         $diary->aws_username = $username;
         $diary->date = $validated['date'];
         $diary->diary = $validated['diary'];
+        $diary->image_path = $image_path;
         $diary->save();
 
         return response()->json([], 201);

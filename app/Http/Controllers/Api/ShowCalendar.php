@@ -19,7 +19,9 @@ class ShowCalendar extends Controller
     /**
      * Handle the incoming request.
      *
-     * @return
+     * @param  Request  $request
+     * @param  Y-m $year_month 年月
+     * @return Response
      */
     public function __invoke(Request $request, $year_month = null)
     {
