@@ -2,15 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <router-link v-bind:to="{name: 'diary.list'}">
-          <button type="button" class="btn btn-primary">前月</button>
-        </router-link>
-      </div>
-      <div class="col">
         <h1>{{ yearMonth }}</h1>
-      </div>
-      <div class="col">
-        <button type="button" class="btn btn-primary">次月</button>
       </div>
     </div>
     <div class="row seven-cols">
@@ -19,7 +11,7 @@
       <div v-for="(item, index) in calendars" class="col-md-1 border">
         <div>{{ index }}</div>
         <div v-if="item.length !== 0">
-          <div>{{ item.diary }}</div>
+          <div>{{ item.diary.slice(0, 20) }} <router-link v-bind:to="{name:'diary.show', params: { diaryId: item.id }}">全文見る</router-link></div>
           <div><router-link v-bind:to="{name:'diary.edit', params: { diaryId: item.id }}">日記を編集する</router-link></div>
         </div>
         <div v-else>
@@ -52,10 +44,6 @@ export default {
         self.yearMonth = response.data.yearMonth;
         self.calendars = response.data.calendars;
         self.spaceNum = response.data.spaceNum;
-          //let date = new Date(self.yearMonth);
-          //date.setMonth(1);
-          //self.yearMonthLast = date.getDate();
-          //console.log(self.yearMonthLast);
       })
   }
 };

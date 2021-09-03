@@ -6,7 +6,7 @@
         <form v-on:submit.prevent="submit">
           <div class="form-group row">
             <label for="diary" class="col-sm-3 col-form-label">本文</label>
-            <textarea id="diary" :class="['col-sm-9', 'form-control', err.diary ? 'is-invalid' : '']" v-model="diary"></textarea>
+            <textarea id="diary" :class="['col-sm-9', 'form-control', err.diary ? 'is-invalid' : '']" rows="10" v-model="diary"></textarea>
             <span v-if="err.diary" :class="['invalid-feedback']">{{ err.diary[0] }}</span>
           </div>
           <div class="form-group row">

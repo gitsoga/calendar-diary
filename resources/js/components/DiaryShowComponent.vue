@@ -1,54 +1,49 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-6">
-                <form>
-                    <div class="form-group row border-bottom">
-                        <label for="id" class="col-sm-3 col-form-label">ID</label>
-                        <input type="text" class="col-sm-9 form-control-plaintext" readonly id="id"
-                               v-model="task.id">
-                    </div>
-                    <div class="form-group row border-bottom">
-                        <label for="title" class="col-sm-3 col-form-label">Title</label>
-                        <input type="text" class="col-sm-9 form-control-plaintext" readonly id="title"
-                               v-model="task.title">
-                    </div>
-                    <div class="form-group row border-bottom">
-                        <label for="content" class="col-sm-3 col-form-label">Content</label>
-                        <input type="text" class="col-sm-9 form-control-plaintext" readonly id="content"
-                               v-model="task.content">
-                    </div>
-                    <div class="form-group row border-bottom">
-                        <label for="person-in-charge" class="col-sm-3 col-form-label">Person In Charge</label>
-                        <input type="text" class="col-sm-9 form-control-plaintext" readonly id="person-in-charge"
-                               v-model="task.person_in_charge">
-                    </div>
-                </form>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-6">
+        <h2>{{ date }}</h2>
+        <form>
+          <div class="form-group row">
+            <label for="diary" class="col-sm-3 col-form-label">本文</label>
+            <textarea id="diary" class="col-sm-9 form-control" v-model="diary" rows="20" readonly></textarea>
+          </div>
+          <div class="form-group row" v-if="image_path">
+            <label for="image" class="col-sm-3 col-form-label">画像</label>
+            <img :src="image_path" class="col-sm-9">
+          </div>
+          </form>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        props: {
-            taskId: String
-        },
-        data: function () {
-            return {
-                task: {}
-            }
-        },
-        methods: {
-            getTask() {
-                axios.get('/api/tasks/' + this.taskId)
-                    .then((res) => {
-                        this.task = res.data;
-                    });
-            }
-        },
-        mounted() {
-            this.getTask();
-        }
+  export default {
+    props: {
+      diaryId: Number,
+    },
+    data: function () {
+      return {
+        date: null,
+        diary: '',
+        image_path: null,
+      }
+    },
+    methods: {
+      getDiary() {
+        axios.get('/api/edit/' + this.diaryId, {
+          headers: { "X-Authorization": this.getToken() }
+        })
+        .then((res) => {
+          this.date = res.data.date;
+          this.diary = res.data.diary;
+          this.image_path = res.data.image_path;
+        });
+      },
+    },
+    mounted() {
+        this.getDiary();
     }
+  }
 </script>
