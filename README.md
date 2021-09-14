@@ -11,7 +11,7 @@ PHPフレームワークLaravelの勉強用に日記帳を作成します。
 
 ## 環境構築
 
-- dockerファイルを https://github.com/gitsoga/docker-laravel-vue からcloneする
+- dockerファイルを https://github.com/gitsoga/docker-laravel-vue からcloneする(AWS RDS対応版はhttps://github.com/gitsoga/docker-laravel-vue-rds)
 - 以下ファイルをコピーし、値を設定しておく
 ```
 env.sample → .env
