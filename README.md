@@ -5,13 +5,14 @@
 PHPフレームワークLaravelの勉強用に日記帳を作成します。
 
 - カレンダーで月ごとのデザインにし、そこから１日ごとに日記が書けるリンクを貼る。
-- 日記を書いた日はカレンダーに「済」と表示。
-- v1.0.0まではLaravel単体、それ以降はAPI化し表示はvueに置き換え中
-- ログイン機能をAWS Cognitoに置き換えました
+- 日記を書いた日はカレンダーに日記の一部を表示。
+- v1.0.0まではLaravel単体、それ以降はAPI化し表示はvueに置き換えました。
+- ログイン機能をAWS Cognitoに置き換えました。
+- AWS S3を使うために日記１つにつき画像１つ投稿できるようにしました。
 
 ## 環境構築
 
-- dockerファイルを https://github.com/gitsoga/docker-laravel-vue からcloneする
+- dockerファイルを https://github.com/gitsoga/docker-laravel-vue からcloneする(AWS RDS対応版はhttps://github.com/gitsoga/docker-laravel-vue-rds)
 - 以下ファイルをコピーし、値を設定しておく
 ```
 env.sample → .env
