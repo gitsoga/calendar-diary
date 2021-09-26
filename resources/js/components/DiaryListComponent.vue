@@ -1,14 +1,14 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col">
         <h1>{{ yearMonth }}</h1>
       </div>
     </div>
-    <div class="row seven-cols">
-      <div v-for="n in spaceNum" class="col-md-1 border">
+    <div class="flexcontainer">
+      <div v-for="n in spaceNum" class="flexitem border">
       </div>
-      <div v-for="(item, index) in calendars" class="col-md-1 border">
+      <div v-for="(item, index) in calendars" class="flexitem border">
         <div>{{ index }}</div>
         <div v-if="item.length !== 0">
           <div>{{ item.diary.slice(0, 20) }} <router-link v-bind:to="{name:'diary.show', params: { diaryId: item.id }}">全文見る</router-link></div>
@@ -50,4 +50,11 @@ export default {
 </script>
 
 <style>
+.flexcontainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+.flexitem {
+  width: calc(100%/7);
+}
 </style>
