@@ -12,7 +12,7 @@ class CheckDateFormat
      * @param  string $yearMonth
      * @return Exception
      */
-    public static function checkYearMonth($yearMonth)
+    public static function checkYearMonth(string $yearMonth)
     {
         // 日付の形式チェック
         if (preg_match('/\A[0-9]{4}-[0-9]{1,2}\z/', $yearMonth) == false) {
@@ -32,7 +32,7 @@ class CheckDateFormat
      * @param  string $yearMonthDay
      * @return Exception
      */
-    public static function checkYearMonthDay($yearMonthDay)
+    public static function checkYearMonthDay(string $yearMonthDay)
     {
         // 日付の形式チェック
         if (preg_match('/\A[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}\z/', $yearMonthDay) == false) {

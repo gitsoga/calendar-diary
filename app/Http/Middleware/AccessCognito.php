@@ -16,9 +16,9 @@ class AccessCognito
      * tokenをcognitoに渡し検証、usernameを取得する.
      *
      * @param string $jwt
-     * @return string $username|false
+     * @return string $username
      */
-    public static function getUsername($jwt)
+    public static function getUsername(string $jwt): string
     {
         try {
             if ($jwt) {
@@ -60,6 +60,6 @@ class AccessCognito
             Log::error($e->getMessage());
         }
 
-        return false;
+        return '';
     }
 }
