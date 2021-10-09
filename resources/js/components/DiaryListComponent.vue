@@ -43,7 +43,7 @@ export default {
         let self = this
         self.yearMonth = response.data.yearMonth;
         self.calendars = response.data.calendars;
-        self.spaceNum = response.data.spaceNum;
+        self.spaceNum = Number(response.data.spaceNum);
       })
   }
 };
